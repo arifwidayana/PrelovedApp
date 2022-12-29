@@ -1,3 +1,4 @@
+package com.preloved.app.ui.fragment.homepage.buyer.info
 
 import android.app.ActionBar
 import android.app.AlertDialog
@@ -20,16 +21,12 @@ import com.preloved.app.data.network.model.response.RequestApproveOrder
 import com.preloved.app.data.network.model.response.SellerOrderResponse
 import com.preloved.app.databinding.FragmentBuyerInfoBinding
 import com.preloved.app.ui.currency
-import com.preloved.app.ui.fragment.homepage.buyer.info.BuyerInfoContract
-import com.preloved.app.ui.fragment.homepage.buyer.info.BuyerInfoViewModel
-import com.preloved.app.ui.fragment.homepage.home.detail.DetailProductFragmentArgs
-import com.preloved.app.ui.fragment.homepage.sale.SaleFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
 class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewModel>(
     FragmentBuyerInfoBinding::inflate
-) , BuyerInfoContract.View {
+), BuyerInfoContract.View {
     override val viewModel: BuyerInfoViewModel by viewModel()
     private var token = ""
     private lateinit var status: String
@@ -38,13 +35,12 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
     private lateinit var imagePenawar: String
     private lateinit var productName: String
     private lateinit var productPrice: String
-    private lateinit var productBid : String
+    private lateinit var productBid: String
     private lateinit var imageProduct: String
     private var idProduct by Delegates.notNull<Int>()
     private var idOrder by Delegates.notNull<Int>()
 
     private val args by navArgs<BuyerInfoFragmentArgs>()
-
 
     override fun initView() {
         viewModel.userSession()
@@ -61,18 +57,15 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
                 AlertDialog.Builder(requireContext())
                     .setTitle(getString(R.string.warning))
                     .setMessage(getString(R.string.accept_offer))
-                    .setPositiveButton(getString(R.string.accept)){ positive, _ ->
+                    .setPositiveButton(getString(R.string.accept)) { positive, _ ->
                         status = "accepted"
                         val body = RequestApproveOrder(
                             status
                         )
-                        if (token != null && idOrder != null) {
-                            viewModel.statusOrder(token, idOrder, body)
-                            positive.dismiss()
-                        }
-
+                        viewModel.statusOrder(token, idOrder, body)
+                        positive.dismiss()
                     }
-                    .setNegativeButton(getString(R.string.cancel)){ negative, _ ->
+                    .setNegativeButton(getString(R.string.cancel)) { negative, _ ->
                         negative.dismiss()
                     }
                     .show()
@@ -82,29 +75,33 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
                 AlertDialog.Builder(requireContext())
                     .setTitle(getString(R.string.warning))
                     .setMessage(getString(R.string.decline_the_offer))
-                    .setPositiveButton(getString(R.string.sure)){ positive, _ ->
+                    .setPositiveButton(getString(R.string.sure)) { positive, _ ->
                         status = "declined"
                         val body = RequestApproveOrder(
                             status
                         )
-                        if (token != null && idOrder != null) {
-                            viewModel.statusOrder(token, idOrder, body)
-                            positive.dismiss()
-                        }
+                        viewModel.statusOrder(token, idOrder, body)
+                        positive.dismiss()
                     }
-                    .setNegativeButton(getString(R.string.cancel)){ negative, _ ->
+                    .setNegativeButton(getString(R.string.cancel)) { negative, _ ->
                         negative.dismiss()
                     }
                     .show()
             }
             btnHubungi.setOnClickListener {
                 val bottomFragment = BottomSheetBuyerInfoFragment(
-                    namaPenawar, kotaPenawar, imagePenawar, productName, productPrice, productBid, imageProduct
+                    namaPenawar,
+                    kotaPenawar,
+                    imagePenawar,
+                    productName,
+                    productPrice,
+                    productBid,
+                    imageProduct
                 )
                 bottomFragment.show(parentFragmentManager, "Tag")
             }
             btnStatus.setOnClickListener {
-                Log.d("HAYO3",idProduct.toString())
+                Log.d("HAYO3", idProduct.toString())
                 val bottomFragmentStatus = BottomSheetBuyerInfoStatusFragment(
                     idOrder = idOrder
                 )
@@ -126,7 +123,7 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
     override fun setDataToView(data: SellerOrderResponse) {
         getViewBinding().apply {
             tvNamaPenawar.text = data.user.fullName
-            tvKotaPenawar.text = data.user.city.toString()
+            tvKotaPenawar.text = data.user.city
             Glide.with(requireContext())
             Glide.with(requireContext())
                 .load(data.user.imageUrl)
@@ -140,11 +137,7 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
             tvHargaAwalProduk.text = currency(data.product.basePrice)
             tvHargaDitawarProduk.text = currency(data.price)
             namaPenawar = data.user.fullName
-            if(data.user.imageUrl != null){
-                imagePenawar = data.user.imageUrl
-            } else {
-                imagePenawar = "https://www.pngrepo.com/png/362137/180/profile.png"
-            }
+            imagePenawar = data.user.imageUrl
             productName = data.productName
             productPrice = data.basePrice
             productBid = data.price.toString()
@@ -153,11 +146,17 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
             idProduct = data.productId
             idOrder = data.id
 
-            if(data.status == "accepted"){
+            if (data.status == "accepted") {
                 btnGroup.visibility = View.GONE
                 btnGroupAccepted.visibility = View.VISIBLE
                 val bottomFragment = BottomSheetBuyerInfoFragment(
-                    namaPenawar, kotaPenawar, imagePenawar, productName, productPrice, productBid, imageProduct
+                    namaPenawar,
+                    kotaPenawar,
+                    imagePenawar,
+                    productName,
+                    productPrice,
+                    productBid,
+                    imageProduct
                 )
                 bottomFragment.show(parentFragmentManager, "Tag")
 
@@ -168,7 +167,7 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
     override fun observeData() {
         super.observeData()
         viewModel.userSessionResult().observe(viewLifecycleOwner) {
-            if(it.access_token == DatastoreManager.DEFAULT_ACCESS_TOKEN){
+            if (it.access_token == DatastoreManager.DEFAULT_ACCESS_TOKEN) {
                 AlertDialog.Builder(context)
                     .setTitle(getString(R.string.warning))
                     .setMessage(getString(R.string.please_login))
@@ -193,7 +192,7 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
             }
         }
         viewModel.getSellerOrderByIdResult().observe(viewLifecycleOwner) { response ->
-            when(response) {
+            when (response) {
                 is Resource.Loading -> {
                     showLoading(true)
                     showContent(false)
@@ -210,19 +209,25 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
             }
         }
         viewModel.statusOrderResult().observe(viewLifecycleOwner) { response ->
-            when(response) {
+            when (response) {
                 is Resource.Loading -> {
                     showLoading(true)
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    if(status == "accepted"){
+                    if (status == "accepted") {
                         showToastAccept()
                         getViewBinding().apply {
                             btnGroup.visibility = View.GONE
                             btnGroupAccepted.visibility = View.VISIBLE
                             val bottomFragment = BottomSheetBuyerInfoFragment(
-                                namaPenawar, kotaPenawar, imagePenawar, productName, productPrice, productBid, imageProduct
+                                namaPenawar,
+                                kotaPenawar,
+                                imagePenawar,
+                                productName,
+                                productPrice,
+                                productBid,
+                                imageProduct
                             )
                             bottomFragment.show(parentFragmentManager, "Tag")
                         }
@@ -237,9 +242,14 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
             }
         }
     }
+
     private fun showToastAccept() {
         val snackBarView =
-            Snackbar.make(getViewBinding().root, getString(R.string.congratulation_sell), Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                getViewBinding().root,
+                getString(R.string.congratulation_sell),
+                Snackbar.LENGTH_LONG
+            )
         val layoutParams = ActionBar.LayoutParams(snackBarView.view.layoutParams)
         snackBarView.setAction(" ") {
             snackBarView.dismiss()
@@ -251,14 +261,24 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
         layoutParams.gravity = Gravity.TOP
         layoutParams.setMargins(32, 150, 32, 0)
         snackBarView.view.setPadding(24, 16, 0, 16)
-        snackBarView.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary))
+        snackBarView.view.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.primary
+            )
+        )
         snackBarView.view.layoutParams = layoutParams
         snackBarView.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
         snackBarView.show()
     }
+
     private fun showToastDecline() {
         val snackBarView =
-            Snackbar.make(getViewBinding().root, getString(R.string.offer_decline), Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                getViewBinding().root,
+                getString(R.string.offer_decline),
+                Snackbar.LENGTH_LONG
+            )
         val layoutParams = ActionBar.LayoutParams(snackBarView.view.layoutParams)
         snackBarView.setAction(" ") {
             snackBarView.dismiss()
@@ -270,7 +290,12 @@ class BuyerInfoFragment : BaseFragment<FragmentBuyerInfoBinding, BuyerInfoViewMo
         layoutParams.gravity = Gravity.TOP
         layoutParams.setMargins(32, 150, 32, 0)
         snackBarView.view.setPadding(24, 16, 0, 16)
-        snackBarView.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary))
+        snackBarView.view.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.primary
+            )
+        )
         snackBarView.view.layoutParams = layoutParams
         snackBarView.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
         snackBarView.show()

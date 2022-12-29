@@ -1,8 +1,9 @@
+package com.preloved.app.ui.fragment.homepage.buyer.info
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -29,7 +30,7 @@ class BottomSheetBuyerInfoFragment (
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBottomSheetBuyerInfoBinding.inflate(inflater, container, false)
         return binding.root
     }

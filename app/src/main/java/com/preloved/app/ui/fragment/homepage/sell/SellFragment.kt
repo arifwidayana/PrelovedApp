@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
@@ -31,7 +30,6 @@ import com.preloved.app.ui.listCategoryId
 import com.preloved.app.ui.uriToFile
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
-
 
 class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
     FragmentSellBinding::inflate
@@ -369,7 +367,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                             val address = it.data.address
                             val photo = it.data.imageUrl
                             val phone = it.data.phoneNumber
-                            if(city.isEmpty() || address.isEmpty() || photo == null || phone.isEmpty()){
+                            if(city.isEmpty() || address.isEmpty() || photo == false || phone.isEmpty()){
                                 AlertDialog.Builder(requireContext())
                                     .setTitle(getString(R.string.warning))
                                     .setMessage(getString(R.string.message_complate_account))

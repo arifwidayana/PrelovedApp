@@ -230,7 +230,7 @@
     </fragment>
     <fragment
         android:id="@+id/buyerInfoFragment"
-        android:name="BuyerInfoFragment"
+        android:name="com.preloved.app.ui.fragment.homepage.buyer.info.BuyerInfoFragment"
         android:label="BuyerInfoFragment" >
         <action
             android:id="@+id/action_buyerInfoFragment_to_saleFragment"
@@ -248,7 +248,7 @@
     </fragment>
     <dialog
         android:id="@+id/bottomSheetBuyerInfoStatusFragment"
-        android:name="BottomSheetBuyerInfoStatusFragment"
+        android:name="com.preloved.app.ui.fragment.homepage.buyer.info.BottomSheetBuyerInfoStatusFragment"
         android:label="BottomSheetBuyerInfoStatusFragment" >
         <action
             android:id="@+id/action_bottomSheetBuyerInfoStatusFragment_to_saleFragment"

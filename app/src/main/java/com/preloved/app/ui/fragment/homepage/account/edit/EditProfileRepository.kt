@@ -11,7 +11,7 @@ import java.io.File
 class EditProfileRepository(
     private val localDataSource: LocalDataSource,
     private val userDataSource: UserDataSource
-):BaseRepositorylmpl(), EditProfileContract.Repository {
+) : BaseRepositorylmpl(), EditProfileContract.Repository {
     override suspend fun userSession(): Flow<DatastorePreferences> {
         return localDataSource.getUserSession()
     }
@@ -32,14 +32,17 @@ class EditProfileRepository(
         return response
     }
 
-    override suspend fun updateProfileData(token: String,
-                                           email: String,
-                                           nama: String,
-                                           city: String,
-                                           address: String,
-                                           phone: String,
-                                           profilePhoto: File?): UserResponse {
-        val response = userDataSource.updateProfileData(token, email, nama, city, address, phone, profilePhoto)
+    override suspend fun updateProfileData(
+        token: String,
+        email: String,
+        nama: String,
+        city: String,
+        address: String,
+        phone: String,
+        profilePhoto: File?
+    ): UserResponse {
+        val response =
+            userDataSource.updateProfileData(token, email, nama, city, address, phone, profilePhoto)
         saveCacheProfileData(response)
         return response
     }

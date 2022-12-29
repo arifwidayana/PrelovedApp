@@ -3,22 +3,17 @@ package com.preloved.app.ui.fragment.homepage.sell
 import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.preloved.app.R
-import com.preloved.app.base.arch.BaseFragment
 import com.preloved.app.base.model.Resource
 import com.preloved.app.databinding.FragmentBottomSheetChooseCategoryBinding
-import com.preloved.app.databinding.FragmentSellBinding
 import com.preloved.app.ui.listCategory
 import com.preloved.app.ui.listCategoryId
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class BottomSheetChooseCategoryFragment(private val update: ()->Unit) : BottomSheetDialogFragment()  {
     private var _binding : FragmentBottomSheetChooseCategoryBinding? = null
@@ -37,7 +32,7 @@ class BottomSheetChooseCategoryFragment(private val update: ()->Unit) : BottomSh
         super.onViewCreated(view, savedInstanceState)
             binding.btnKirimCategory.setOnClickListener {
                 viewModel.addCategory(listCategory)
-                Handler().postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
                     binding.pbLoading.visibility = View.GONE
                     update.invoke()
                     dismiss()

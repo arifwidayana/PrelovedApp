@@ -1,26 +1,20 @@
+package com.preloved.app.ui.fragment.homepage.buyer.info
 
-import android.app.ActionBar
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.preloved.app.R
 import com.preloved.app.base.model.Resource
 import com.preloved.app.data.local.datastore.DatastoreManager
 import com.preloved.app.data.network.model.response.RequestApproveOrder
 import com.preloved.app.databinding.FragmentBottomSheetBuyerInfoStatusBinding
-import com.preloved.app.ui.fragment.homepage.buyer.info.BuyerInfoViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BottomSheetBuyerInfoStatusFragment(private val idOrder: Int) : BottomSheetDialogFragment() {
@@ -34,7 +28,7 @@ class BottomSheetBuyerInfoStatusFragment(private val idOrder: Int) : BottomSheet
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBottomSheetBuyerInfoStatusBinding.inflate(inflater, container, false)
         viewModel.userSession()
         viewModel.userSessionResult().observe(viewLifecycleOwner) {

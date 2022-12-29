@@ -36,7 +36,7 @@ class SaleHistoryAdapter(private val OnItemClick: OnClickListener) : RecyclerVie
     inner class ViewHolder(private val binding: ItemHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: HistoryResponseItem) {
-            if(data.product != null && data.status == "accepted"){
+            if(data.status == "accepted"){
                 val basePrice = currency(data.product.basePrice)
                 val priceNego = currency(data.price)
                 val date = convertDate(data.createdAt)
@@ -51,17 +51,9 @@ class SaleHistoryAdapter(private val OnItemClick: OnClickListener) : RecyclerVie
                     }
                     tvHargaDitawarProduk.text = "Selled $priceNego"
                     tvTanggal.text = date
-                    if (data.status == "accepted") {
-                        root.setOnClickListener {
-                            OnItemClick.onClickItem(data)
-                        }
+                    root.setOnClickListener {
+                        OnItemClick.onClickItem(data)
                     }
-//                if (data.status == "declined") {
-//                    root.alpha = 0.5f
-//                    tvHargaDitawarProduk.apply {
-//                        text = striketroughtText(this,priceNego)
-//                    }
-//                }
                 }
             } else {
                 binding.apply {
