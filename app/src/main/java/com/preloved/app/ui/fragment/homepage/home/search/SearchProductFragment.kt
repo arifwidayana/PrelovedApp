@@ -80,10 +80,15 @@ class SearchProductFragment : BaseFragment<FragmentSearchProductBinding, SearchP
         getViewBinding().rvListCategory.isVisible = isVisible
     }
 
+    override fun showEmptyContent(isVisible: Boolean) {
+        super.showEmptyContent(isVisible)
+        getViewBinding().constraintLayout.isVisible = isVisible
+    }
+
     override fun observeData() {
         viewModel.apply {
             getSearchProductResult().observe(viewLifecycleOwner) {
-                when(it){
+                when (it) {
                     is Resource.Loading -> {
                         showLoading(true)
                         showContent(false)
@@ -105,14 +110,23 @@ class SearchProductFragment : BaseFragment<FragmentSearchProductBinding, SearchP
     private fun getSearchProduct(data: CategoryResponse?) {
         getViewBinding().apply {
             val searchAdapter = CategoryAllAdapter {
-                val passData = SearchProductFragmentDirections.actionSearchProductFragmentToDetailProductFragment2(
-                    productId = it.id,
-                    status = 1
-                )
+                val passData =
+                    SearchProductFragmentDirections.actionSearchProductFragmentToDetailProductFragment2(
+                        productId = it.id,
+                        status = 1
+                    )
                 findNavController().navigate(passData)
             }
-            searchAdapter.submitList(data?.filter {it.status == "available"})
+            searchAdapter.submitList(data?.filter { it.status == "available" })
             rvListCategory.adapter = searchAdapter
+            when (data?.size) {
+                0 -> {
+                    showEmptyContent(true)
+                }
+                else -> {
+                    showEmptyContent(false)
+                }
+            }
         }
     }
 }
