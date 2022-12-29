@@ -10,14 +10,15 @@ import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 import java.lang.IllegalArgumentException
 
-abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>(
+abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     private val bindingFactory: (LayoutInflater) -> VB
-): Fragment(), BaseContract.BaseView {
+) : Fragment(), BaseContract.BaseView {
 
     private var bind: VB? = null
     private val binding: VB get() = bind as VB
+
     //private lateinit var viewModelInstance: VM
-    protected abstract val viewModel : VM
+    protected abstract val viewModel: VM
 
     fun getViewBinding(): VB = binding
     //fun getViewModel(): VM = viewModelInstance
@@ -46,20 +47,14 @@ abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>(
     }
 
     abstract fun initView()
-    override fun observeData() {
-        //do nothing
-    }
+    override fun observeData() { }
 
-    override fun showContent(isVisible: Boolean) {
-        //do nothing
-    }
-
-    override fun showLoading(isVisible: Boolean) {
-        //do nothing
-    }
+    override fun showEmptyContent(isVisible: Boolean) {}
+    override fun showContent(isVisible: Boolean) {}
+    override fun showLoading(isVisible: Boolean) {}
 
     override fun showError(isErrorEnabled: Boolean, msg: String?) {
-        when{
+        when {
             isErrorEnabled -> {
                 Toast.makeText(requireContext(), "Message: $msg", Toast.LENGTH_SHORT).show()
             }
