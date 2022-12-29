@@ -105,13 +105,11 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>
                         is Resource.Success -> {
                             showLoading(false)
                             if(it.data != null) {
-                                if(it.data.imageUrl != null ) {
-                                    Glide.with(requireContext())
-                                        .load(it.data.imageUrl.toString())
-                                        .placeholder(R.drawable.ic_profile)
-                                        .transform(CenterCrop(), RoundedCorners(12))
-                                        .into(getViewBinding().ivProfile)
-                                }
+                                Glide.with(requireContext())
+                                    .load(it.data.imageUrl.toString())
+                                    .placeholder(R.drawable.ic_profile)
+                                    .transform(CenterCrop(), RoundedCorners(12))
+                                    .into(getViewBinding().ivProfile)
                             }
                         }
                         is Resource.Error -> {

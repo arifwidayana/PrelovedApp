@@ -54,28 +54,24 @@ class NotificationAdapter(
                 binding.apply {
                     when (data.status) {
                         "bid" -> {
-                            if (data.product != null){
-                                tvHargaAwalProduk.apply {
-                                    text = striketroughtText(this, currency(data.basePrice.toInt()))
+                            tvHargaAwalProduk.apply {
+                                text = striketroughtText(this, currency(data.basePrice.toInt()))
+                            }
+                            if(data.receiverId == data.product.userId){
+                                tvPesan.text = "Someone bid on your product"
+                                if(data.notificationType == "seller"){
+                                    root.setOnClickListener{
+                                        onItemClick.onClickItemInfo(data)
+                                    }
                                 }
-                                if(data.receiverId == data.product.userId){
-                                    tvPesan.text = "Someone bid on your product"
-                                    if(data.notificationType == "seller"){
-                                        root.setOnClickListener{
-                                            onItemClick.onClickItemInfo(data)
-                                        }
-                                    }
-                                    if (data.product.status == "sold"){
-                                        tvTipeProduk.text = "Product Accepted"
-                                        tvPesan.text = "You accept this offer"
-                                    }
-                                } else {
-                                    tvPesan.text = "Your offer has not been accepted by the seller, be patient!"
+                                if (data.product.status == "sold"){
+                                    tvTipeProduk.text = "Product Accepted"
+                                    tvPesan.text = "You accept this offer"
                                 }
                             } else {
-                                tvPesan.text = "Product Already Delete By Seller"
+                                tvPesan.text = "Your offer has not been accepted by the seller, be patient!"
                             }
-//                            root.setOnClickListener{
+                            //                            root.setOnClickListener{
 //                                onItemClick.onClickItem(data)
 //                            }
                         }
@@ -84,20 +80,16 @@ class NotificationAdapter(
                                 text = striketroughtText(this, currency(data.basePrice.toInt()))
                             }
                             tvTipeProduk.text = "Product Declined"
-                            if (data.product != null){
-                                if (data.receiverId == data.product.userId){
-                                    if (data.notificationType == "seller")
-                                    tvPesan.text = "You decline this offer"
-                                } else {
-                                    tvPesan.text = "Your offer was declined by the Seller"
-                                    if (data.notificationType == "buyer"){
-                                        root.setOnClickListener{
-                                            onItemClick.onClickItem(data)
-                                        }
+                            if (data.receiverId == data.product.userId){
+                                if (data.notificationType == "seller")
+                                tvPesan.text = "You decline this offer"
+                            } else {
+                                tvPesan.text = "Your offer was declined by the Seller"
+                                if (data.notificationType == "buyer"){
+                                    root.setOnClickListener{
+                                        onItemClick.onClickItem(data)
                                     }
                                 }
-                            } else {
-                                tvPesan.text = "Product Already Delete By Seller"
                             }
                             root.setOnClickListener{
                                 onItemClick.onClickItem(data)
@@ -108,24 +100,20 @@ class NotificationAdapter(
                                 text = striketroughtText(this, currency(data.basePrice.toInt()))
                             }
                             tvTipeProduk.text = "Product Accepted"
-                            if (data.product != null){
-                                if (data.receiverId == data.product.userId){
-                                    tvPesan.text = "You accept this product"
-                                    if(data.notificationType == "seller"){
-                                        root.setOnClickListener{
-                                            onItemClick.onClickItemInfo(data)
-                                        }
-                                    }
-                                } else {
-                                    tvPesan.text = "Your offer is accepted by the Seller"
-                                    if (data.notificationType == "buyer"){
-                                        root.setOnClickListener{
-                                            onItemClick.onClickItem(data)
-                                        }
+                            if (data.receiverId == data.product.userId){
+                                tvPesan.text = "You accept this product"
+                                if(data.notificationType == "seller"){
+                                    root.setOnClickListener{
+                                        onItemClick.onClickItemInfo(data)
                                     }
                                 }
                             } else {
-                                tvPesan.text = "Product Already Delete By Seller"
+                                tvPesan.text = "Your offer is accepted by the Seller"
+                                if (data.notificationType == "buyer"){
+                                    root.setOnClickListener{
+                                        onItemClick.onClickItem(data)
+                                    }
+                                }
                             }
                             root.setOnClickListener{
                                 onItemClick.onClickItem(data)
@@ -145,15 +133,17 @@ class NotificationAdapter(
 //                        }
                     }
                     tvHargaDitawarProduk.text =
-                        if (data.status == "declined") "Declined " + currency(data.bidPrice)
-                        else if(data.status == "accepted") "Accepted " + currency(data.bidPrice)
-                        else if(data.status == "bid") "Offer " + currency(data.bidPrice)
-                        else ""
+                        when (data.status) {
+                            "declined" -> "Declined " + currency(data.bidPrice)
+                            "accepted" -> "Accepted " + currency(data.bidPrice)
+                            "bid" -> "Offer " + currency(data.bidPrice)
+                            else -> ""
+                        }
                     tvNamaProduk.text = data.productName
 //                    tvHargaAwalProduk.apply {
 //                        text = striketroughtText(this, currency(data.basePrice.toInt()))
 //                    }
-                    tvTanggal.text = data.transactionDate?.let { convertDate(it) }
+                    tvTanggal.text = convertDate(data.transactionDate)
                     if (!data.read){
                         Glide.with(binding.root)
                             .load(data.imageUrl)

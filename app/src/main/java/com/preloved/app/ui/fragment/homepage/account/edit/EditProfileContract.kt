@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import java.io.File
 
 interface EditProfileContract {
-    interface View :BaseContract.BaseView {
+    interface View : BaseContract.BaseView {
         fun checkFormValidation(): Boolean
         fun setDataToView(data: UserResponse)
         fun getData()
@@ -23,13 +23,16 @@ interface EditProfileContract {
         fun getChangeProfileResultLiveData(): MutableLiveData<Resource<UserResponse>>
         fun getProfileLiveData(): MutableLiveData<Resource<UserResponse>>
         fun getProfileData()
-        fun updateProfileData(token: String,
-                              email: String,
-                              nama: String,
-                              city: String,
-                              address: String,
-                              phone: String,
-                              profilePhoto: File? = null)
+        fun updateProfileData(
+            token: String,
+            email: String,
+            nama: String,
+            city: String,
+            address: String,
+            phone: String,
+            profilePhoto: File? = null
+        )
+
         fun logout()
     }
 
@@ -39,12 +42,14 @@ interface EditProfileContract {
         fun clearSession()
         suspend fun saveCacheProfileData(response: UserResponse)
 
-        suspend fun updateProfileData(email: String,
-                                      nama: String,
-                                      city: String,
-                                      address: String,
-                                      phone: String,
-                                      token: String,
-                                      profilePhoto: File? = null): UserResponse
+        suspend fun updateProfileData(
+            token: String,
+            email: String,
+            nama: String,
+            city: String,
+            address: String,
+            phone: String,
+            profilePhoto: File? = null
+        ): UserResponse
     }
 }
