@@ -3,7 +3,7 @@ package com.preloved.app.di
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.preloved.app.data.network.service.CategoryService
 import com.preloved.app.data.network.service.WishlistService
-import com.preloved.app.data.network.services.PreLovedService
+import com.preloved.app.data.network.service.PreLovedService
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

@@ -5,17 +5,13 @@ import com.preloved.app.data.network.model.BuyerOrderResponse
 import com.preloved.app.data.network.model.HistoryResponseItem
 import com.preloved.app.data.network.model.request.auth.LoginRequest
 import com.preloved.app.data.network.model.request.auth.RegisterRequest
-import com.preloved.app.data.network.model.request.auth.UpdateProfileRequest
 import com.preloved.app.data.network.model.response.*
 import com.preloved.app.data.network.model.response.auth.LoginResponse
 import com.preloved.app.data.network.model.response.auth.RegisterResponse
-import com.preloved.app.data.network.services.PreLovedService
-import okhttp3.MediaType
+import com.preloved.app.data.network.service.PreLovedService
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 import java.io.File
 

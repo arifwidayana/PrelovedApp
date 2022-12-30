@@ -1,13 +1,13 @@
 package com.preloved.app.data.network.service
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.preloved.app.BuildConfig
 import com.preloved.app.data.network.model.request.wishlist.WishlistRequest
 import com.preloved.app.data.network.model.response.whislist.AddWishlistResponse
 import com.preloved.app.data.network.model.response.whislist.DeleteWishlistResponse
 import com.preloved.app.data.network.model.response.whislist.GetWishlistResponse
 import com.preloved.app.data.network.model.response.whislist.GetWishlistByIdResponse
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -43,7 +43,7 @@ interface WishlistService {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://market-final-project.herokuapp.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()

@@ -10,8 +10,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.preloved.app.R
 import com.preloved.app.base.arch.BaseFragment
@@ -27,7 +25,6 @@ class EditProfileFragment() : BaseFragment<FragmentEditProfileBinding, EditProfi
 ), EditProfileContract.View {
     private var selectedPicture: File? = null
     private var token = ""
-
 
     override val viewModel: EditProfileViewModel by viewModel()
 
@@ -197,13 +194,9 @@ class EditProfileFragment() : BaseFragment<FragmentEditProfileBinding, EditProfi
             etPhone.setText(data.phoneNumber)
             Glide.with(requireContext())
                 .load(data.imageUrl)
-                .transform(CenterCrop(), RoundedCorners(12))
+                .circleCrop()
                 .placeholder(R.drawable.ic_profile)
                 .into(getViewBinding().ivProfile)
-//            tfAddress.error = null
-//            tfNama.error = null
-//            tfPhone.error = null
-//            tfCity.error = null
         }
     }
     override fun setOnClickListeners() {

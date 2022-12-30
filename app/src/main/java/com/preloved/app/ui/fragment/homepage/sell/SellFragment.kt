@@ -33,11 +33,12 @@ import java.io.File
 
 class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
     FragmentSellBinding::inflate
-) , SellContract.View {
+), SellContract.View {
     private var citySeller: String = ""
     private var uri: String = ""
     private var token: String = ""
     private val bundle = Bundle()
+
     companion object {
         const val USER_TOKEN = "user_token"
         const val TITLE_PRODUCT = "title_product"
@@ -47,15 +48,9 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
         const val NAME_USER = "name"
         const val IMAGE_USER = "image_user"
         const val CATEGORY_PRODUCT = "category"
-        const val IMAGE_PRODUCT ="image_product"
+        const val IMAGE_PRODUCT = "image_product"
     }
 
-
-
-    override fun showLoading(isVisible: Boolean) {
-        super.showLoading(isVisible)
-        getViewBinding().pbLoading.isVisible = isVisible
-    }
     private var selectedPicture: File? = null
     override val viewModel: SellViewModel by viewModel()
 
@@ -82,6 +77,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
             etKategory.addTextChangedListener(textWatcher)
         }
     }
+
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -101,9 +97,17 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
         }
     }
 
+    override fun showLoading(isVisible: Boolean) {
+        super.showLoading(isVisible)
+        getViewBinding().pbLoading.isVisible = isVisible
+    }
 
+    override fun showContent(isVisible: Boolean) {
+        super.showContent(isVisible)
+        getViewBinding().nsv.isVisible = isVisible
+    }
 
-        override fun checkFormValidation(): Boolean {
+    override fun checkFormValidation(): Boolean {
         getViewBinding().apply {
             var isFormValid = true
             val nameProduct = etNamaProduk.text.toString()
@@ -133,7 +137,11 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                 }
                 uri.isEmpty() -> {
                     isFormValid = false
-                    Toast.makeText(context, getString(R.string.inser_image_first), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        getString(R.string.inser_image_first),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 else -> {
                     tfNamaProduk.isErrorEnabled = false
@@ -190,7 +198,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
             val resultCode = result.resultCode
             val data = result.data
 
-            when(resultCode) {
+            when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
                     uri = fileUri.toString()
@@ -205,18 +213,24 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT)
+                        .show()
                 }
                 else -> {
-                    Toast.makeText(requireContext(), getString(R.string.task_cancelled), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.task_cancelled),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
+
     override fun setOnClickListeners() {
         getViewBinding().apply {
 
             btnJual.setOnClickListener {
-                if (checkFormValidation()){
+                if (checkFormValidation()) {
                     val productName = etNamaProduk.text.toString()
                     val productPrice = etHargaProduk.text.toString().toInt()
                     val productDesc = etDeskripsi.text.toString()
@@ -232,7 +246,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                 }
             }
             btnPreview.setOnClickListener {
-                if (checkFormValidation()){
+                if (checkFormValidation()) {
                     val productName = etNamaProduk.text.toString()
                     val productPrice = etHargaProduk.text.toString().toInt()
                     val productDesc = etDeskripsi.text.toString()
@@ -244,11 +258,14 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                     bundle.putString(CATEGORY_PRODUCT, categoryProduct)
                     bundle.putString(IMAGE_PRODUCT, uri)
 
-                    findNavController().navigate(R.id.action_sellFragment_to_previewProductFragment, bundle)
+                    findNavController().navigate(
+                        R.id.action_sellFragment_to_previewProductFragment,
+                        bundle
+                    )
                 }
             }
-            viewModel.getChangeProfileResultLiveData().observe(viewLifecycleOwner){ response ->
-                when(response) {
+            viewModel.getChangeProfileResultLiveData().observe(viewLifecycleOwner) { response ->
+                when (response) {
                     is Resource.Loading -> {
                         showLoading(true)
                     }
@@ -261,7 +278,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                         showLoading(false)
                         showError(true, response.message)
                         var message = ""
-                        when(response.message){
+                        when (response.message) {
                             "HTTP 400 Bad Request" -> {
                                 message = getString(R.string.max_upload)
                             }
@@ -277,7 +294,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                 }
 
             }
-            ibAddImage.setOnClickListener{
+            ibAddImage.setOnClickListener {
                 ImagePicker.with(this@SellFragment)
                     .crop()
                     .saveDir(
@@ -287,7 +304,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                         )
                     )
                     .compress(1024)
-                    .maxResultSize(1080,1080)
+                    .maxResultSize(1080, 1080)
                     .createIntent {
                         startForProfileImageResult.launch(it)
                     }
@@ -302,6 +319,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
         }
 
     }
+
     override fun observeData() {
         super.observeData()
 
@@ -324,17 +342,18 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
             }
         }
         getViewBinding().apply {
-            viewModel.userSessionResult().observe(viewLifecycleOwner){
-                if(it.access_token == DatastoreManager.DEFAULT_ACCESS_TOKEN) {
+            viewModel.userSessionResult().observe(viewLifecycleOwner) {
+                if (it.access_token == DatastoreManager.DEFAULT_ACCESS_TOKEN) {
                     AlertDialog.Builder(context)
                         .setTitle(getString(R.string.warning))
                         .setMessage(getString(R.string.please_login))
                         .setPositiveButton(getString(R.string.login)) { dialogP, _ ->
                             //ToLogin Fragment
                             dialogP.dismiss()
-                            val passData = SellFragmentDirections.actionSellFragmentToLoginFragment3(
-                                status = 1
-                            )
+                            val passData =
+                                SellFragmentDirections.actionSellFragmentToLoginFragment3(
+                                    status = 1
+                                )
                             findNavController().navigate(passData)
                             viewModel.userSessionResult().removeObservers(viewLifecycleOwner)
 
@@ -350,28 +369,28 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                 } else {
                     token = it.access_token
                     viewModel.getUserData(it.access_token)
-                    bundle.putString(USER_TOKEN,it.access_token)
+                    bundle.putString(USER_TOKEN, it.access_token)
                 }
                 viewModel.userSessionResult().removeObservers(viewLifecycleOwner)
             }
 
-            viewModel.getUserDataResult().observe(viewLifecycleOwner){
+            viewModel.getUserDataResult().observe(viewLifecycleOwner) {
                 when (it) {
                     is Resource.Loading -> {
                         showLoading(true)
                     }
                     is Resource.Success -> {
                         showLoading(false)
-                        if(it.data != null){
+                        if (it.data != null) {
                             val city = it.data.city
                             val address = it.data.address
                             val photo = it.data.imageUrl
                             val phone = it.data.phoneNumber
-                            if(city.isEmpty() || address.isEmpty() || photo == false || phone.isEmpty()){
+                            if (city.isEmpty() || address.isEmpty() || photo == null || phone.isEmpty()) {
                                 AlertDialog.Builder(requireContext())
                                     .setTitle(getString(R.string.warning))
                                     .setMessage(getString(R.string.message_complate_account))
-                                    .setPositiveButton(getString(R.string.OK)){ positiveButton, _ ->
+                                    .setPositiveButton(getString(R.string.OK)) { positiveButton, _ ->
                                         positiveButton.dismiss()
                                         findNavController().navigate(R.id.action_sellFragment_to_editProfileFragment)
                                     }
@@ -383,7 +402,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                                     .show()
                             } else {
                                 citySeller = it.data.city
-                                bundle.putString(CITY_USER,it.data.city)
+                                bundle.putString(CITY_USER, it.data.city)
                                 bundle.putString(NAME_USER, it.data.fullName)
                                 bundle.putString(IMAGE_USER, it.data.imageUrl.toString())
 
@@ -391,7 +410,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                         }
                     }
                     is Resource.Error -> {
-                        if(it.message!!.contains("403")){
+                        if (it.message!!.contains("403")) {
                             AlertDialog.Builder(context)
                                 .setTitle(getString(R.string.warning))
                                 .setMessage(getString(R.string.your_session))
@@ -412,9 +431,14 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
 
         }
     }
+
     private fun showToastSuccess() {
         val snackBarView =
-            Snackbar.make(getViewBinding().root, getString(R.string.toast_product_add), Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                getViewBinding().root,
+                getString(R.string.toast_product_add),
+                Snackbar.LENGTH_LONG
+            )
         val layoutParams = ActionBar.LayoutParams(snackBarView.view.layoutParams)
         snackBarView.setAction(" ") {
             snackBarView.dismiss()
@@ -426,7 +450,12 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
         layoutParams.gravity = Gravity.TOP
         layoutParams.setMargins(32, 150, 32, 0)
         snackBarView.view.setPadding(24, 16, 0, 16)
-        snackBarView.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary))
+        snackBarView.view.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.primary
+            )
+        )
         snackBarView.view.layoutParams = layoutParams
         snackBarView.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
         snackBarView.show()

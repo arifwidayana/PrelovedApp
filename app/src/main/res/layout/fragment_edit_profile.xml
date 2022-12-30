@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.homepage.account.edit.EditProfileFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -11,212 +11,215 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent">
+
         <ImageButton
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_back"
-            android:background="@color/white"
             android:layout_marginTop="20dp"
-            android:contentDescription="@string/contentbackbutton" />
+            android:background="@color/white"
+            android:contentDescription="@string/contentbackbutton"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppinssemibold"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:fontFamily="@font/poppinssemibold"
             android:text="@string/change_profile"
             android:textColor="@color/black"
             android:textSize="@dimen/header" />
 
     </androidx.appcompat.widget.Toolbar>
-    <ScrollView
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp">
-        <ProgressBar
-            android:id="@+id/pb_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:visibility="visible"
-            android:visibility="gone"
-            />
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="btn_change,fl_profile_pict,tf_address,tf_city,tf_email,tf_nama,tf_phone"
-            />
-        <FrameLayout
-            android:id="@+id/fl_profile_pict"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_profile">
-        <ImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_profile"
-            app:layout_constraintEnd_toEndOf="@+id/tv_ubah_profile"
-            app:layout_constraintStart_toStartOf="@+id/tv_ubah_profile"
-            app:layout_constraintTop_toBottomOf="@id/tv_ubah_profile"
-            android:contentDescription="@string/ubah_profile" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <ImageView
-            android:id="@+id/iv_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            android:layout_gravity="bottom|end"
-            android:contentDescription="@string/add" />
-        </FrameLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tf_nama"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@id/fl_profile_pict"
-            >
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="30dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_nama"
-                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="btn_change,fl_profile_pict,tf_address,tf_city,tf_email,tf_nama,tf_phone" />
+
+            <FrameLayout
+                android:id="@+id/fl_profile_pict"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_profile">
+
+                <ImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/ubah_profile"
+                    android:src="@drawable/ic_profile"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_ubah_profile"
+                    app:layout_constraintStart_toStartOf="@+id/tv_ubah_profile"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ubah_profile" />
+
+                <ImageView
+                    android:id="@+id/iv_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:contentDescription="@string/add"
+                    android:src="@drawable/ic_add" />
+            </FrameLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_nama"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/your_full_name"
-                android:fontFamily="@font/poppinsmedium"
-                android:textSize="@dimen/content"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:inputType="textPersonName"
-                />
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/fl_profile_pict">
 
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tf_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:enabled="false"
-            android:focusableInTouchMode="false"
-            app:placeholderTextColor="@color/secondary"
-            app:layout_constraintTop_toBottomOf="@id/tf_nama"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_nama"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:hint="@string/your_full_name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_email"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/your_valid_email"
-                android:fontFamily="@font/poppinsmedium"
-                android:maxLines="1"
-                android:inputType="none"
+                android:layout_marginTop="20dp"
                 android:enabled="false"
                 android:focusableInTouchMode="false"
-                />
+                app:layout_constraintTop_toBottomOf="@id/tf_nama"
+                app:placeholderTextColor="@color/secondary">
 
-        </com.google.android.material.textfield.TextInputLayout>
-         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tf_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:placeholderTextColor="@color/secondary"
-            app:layout_constraintTop_toBottomOf="@id/tf_email"
-            app:startIconDrawable="@drawable/ic_enamdua"
-            >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:focusableInTouchMode="false"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:hint="@string/your_valid_email"
+                    android:inputType="none"
+                    android:maxLines="1" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_phone"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_phone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/your_phone_number"
-                android:fontFamily="@font/poppinsmedium"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:inputType="phone"
-                />
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tf_email"
+                app:placeholderTextColor="@color/secondary"
+                app:startIconDrawable="@drawable/ic_enamdua">
 
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tf_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:placeholderTextColor="@color/secondary"
-            app:layout_constraintTop_toBottomOf="@id/tf_phone"
-            >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:hint="@string/your_phone_number"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_city"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_city"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_your_city"
-                android:fontFamily="@font/poppinsmedium"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:inputType="textPostalAddress"
-                />
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tf_phone"
+                app:placeholderTextColor="@color/secondary">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:hint="@string/enter_your_city"
+                    android:inputType="textPostalAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tf_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:placeholderTextColor="@color/secondary"
-            app:layout_constraintTop_toBottomOf="@id/tf_city"
-            >
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_address"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_address"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_your_address"
-                android:fontFamily="@font/poppinsmedium"
-                android:textColor="@color/black"
-                android:maxLines="1"
-                android:inputType="textPostalAddress"
-                />
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tf_city"
+                app:placeholderTextColor="@color/secondary">
 
-        </com.google.android.material.textfield.TextInputLayout>
-        <Button
-            android:id="@+id/btn_change"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/save"
-            app:layout_constraintTop_toBottomOf="@id/tf_address"
-            android:fontFamily="@font/poppinsmedium"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:hint="@string/enter_your_address"
+                    android:inputType="textPostalAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_change"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="72dp"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="@string/save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tf_address" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
