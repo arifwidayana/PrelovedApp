@@ -6,8 +6,6 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.preloved.app.BuildConfig
 import com.preloved.app.R
 import com.preloved.app.base.arch.BaseFragment
@@ -29,6 +27,11 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>(
     override fun showLoading(isVisible: Boolean) {
         super.showLoading(isVisible)
         getViewBinding().pbLoading.isVisible = isVisible
+    }
+
+    override fun showContent(isVisible: Boolean) {
+        super.showContent(isVisible)
+        getViewBinding().nsv.isVisible = isVisible
     }
 
     override fun initView() {
@@ -109,20 +112,24 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>(
             when (it) {
                 is Resource.Loading -> {
                     showLoading(true)
+                    showContent(false)
                 }
                 is Resource.Success -> {
                     showLoading(false)
+                    showContent(true)
                     if (it.data != null) {
                         if (it.data.imageUrl != null) {
                             Glide.with(requireContext())
                                 .load(it.data.imageUrl.toString())
                                 .placeholder(R.drawable.ic_profile)
-                                .transform(CenterCrop(), RoundedCorners(12))
+                                .circleCrop()
                                 .into(getViewBinding().ivProfile)
                         }
                     }
                 }
                 is Resource.Error -> {
+                    showLoading(false)
+                    showContent(true)
                     if (it.message!!.contains("403")) {
                         AlertDialog.Builder(context)
                             .setTitle(getString(R.string.warning))

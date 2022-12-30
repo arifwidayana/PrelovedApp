@@ -276,7 +276,6 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleViewModel>
 
     override fun showLoading(isVisible: Boolean) {
         super.showLoading(isVisible)
-        getViewBinding().pbLoadingUser.isVisible = isVisible
         getViewBinding().pbLoading.isVisible = isVisible
     }
 
@@ -324,7 +323,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleViewModel>
                                 Glide.with(requireContext())
                                     .load(it.data.imageUrl.toString())
                                     .placeholder(R.drawable.ic_profile)
-                                    .transform(CenterCrop(), RoundedCorners(12))
+                                    .circleCrop()
                                     .into(getViewBinding().ivAvatarPenjual)
                             }
                             getViewBinding().apply {
@@ -379,6 +378,7 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleViewModel>
             rvDiminati.visibility = View.GONE
             rvTerjual.visibility = View.GONE
             rvHistory.visibility = View.GONE
+            rvProduct.visibility = View.GONE
         }
         val availableProductSize = it.data?.filter { it.status == "available" }?.size
         if (it.data != null) {

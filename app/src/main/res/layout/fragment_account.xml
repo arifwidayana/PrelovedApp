@@ -12,168 +12,164 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:contentDescription="@string/contentbackbutton"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:fontFamily="@font/poppinssemibold"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
             android:text="@string/akun"
             android:textColor="@color/black"
             android:textSize="@dimen/header" />
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <ImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="21dp"
-            android:contentDescription="@string/contentbackbutton"
-            android:src="@drawable/ic_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_change_profile"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:drawablePadding="20dp"
-            android:fontFamily="@font/poppinssemibold"
-            android:text="@string/ubah_profile"
-            android:textColor="@color/black"
-            android:textSize="@dimen/content"
-            app:drawableStartCompat="@drawable/ic_pencil"
-            app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/tv_change_profile" />
+            <ImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/contentbackbutton"
+                android:src="@drawable/ic_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_change_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:drawablePadding="20dp"
-            android:fontFamily="@font/poppinssemibold"
-            android:text="@string/change_password"
-            android:textColor="@color/black"
-            android:textSize="@dimen/content"
-            app:drawableStartCompat="@drawable/ic_password"
-            app:layout_constraintTop_toBottomOf="@id/tv_change_profile" />
+            <TextView
+                android:id="@+id/tv_change_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/poppinssemibold"
+                android:text="@string/ubah_profile"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content"
+                app:drawableStartCompat="@drawable/ic_pencil"
+                app:layout_constraintTop_toBottomOf="@id/iv_profile" />
 
-        <View
-            android:id="@+id/line2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/tv_change_password" />
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/tv_change_profile" />
 
-        <TextView
-            android:id="@+id/tv_my_order"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:drawablePadding="20dp"
-            android:fontFamily="@font/poppinssemibold"
-            android:text="@string/my_order"
-            android:textColor="@color/black"
-            android:textSize="@dimen/content"
-            app:drawableStartCompat="@drawable/ic_order"
-            app:layout_constraintTop_toBottomOf="@id/line2" />
+            <TextView
+                android:id="@+id/tv_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/poppinssemibold"
+                android:text="@string/change_password"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content"
+                app:drawableStartCompat="@drawable/ic_password"
+                app:layout_constraintTop_toBottomOf="@id/tv_change_profile" />
 
-        <View
-            android:id="@+id/line3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_order" />
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/tv_change_password" />
 
-        <TextView
-            android:id="@+id/tv_wishlist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:drawablePadding="16dp"
-            android:fontFamily="@font/poppinssemibold"
-            android:text="@string/wishlist_product"
-            android:textColor="@color/black"
-            android:textSize="@dimen/content"
-            app:drawableStartCompat="@drawable/ic_selected_wishlist"
-            app:layout_constraintTop_toBottomOf="@id/line3" />
+            <TextView
+                android:id="@+id/tv_my_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/poppinssemibold"
+                android:text="@string/my_order"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content"
+                app:drawableStartCompat="@drawable/ic_order"
+                app:layout_constraintTop_toBottomOf="@id/line2" />
 
-        <View
-            android:id="@+id/line4"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/tv_wishlist" />
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_order" />
 
-        <TextView
-            android:id="@+id/tv_exit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:drawablePadding="20dp"
-            android:fontFamily="@font/poppinssemibold"
-            android:text="@string/keluar"
-            android:textColor="@color/black"
-            android:textSize="@dimen/content"
-            app:drawableStartCompat="@drawable/ic_exit"
-            app:layout_constraintTop_toBottomOf="@id/line4" />
+            <TextView
+                android:id="@+id/tv_wishlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/poppinssemibold"
+                android:text="@string/wishlist_product"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content"
+                app:drawableStartCompat="@drawable/ic_selected_wishlist"
+                app:layout_constraintTop_toBottomOf="@id/line3" />
 
-        <View
-            android:id="@+id/line5"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/tv_exit" />
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/tv_wishlist" />
 
-        <TextView
-            android:id="@+id/tv_version_app"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:fontFamily="@font/poppinsmedium"
-            android:text="@string/version_app"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line5" />
+            <TextView
+                android:id="@+id/tv_exit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/poppinssemibold"
+                android:text="@string/keluar"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content"
+                app:drawableStartCompat="@drawable/ic_exit"
+                app:layout_constraintTop_toBottomOf="@id/line4" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/tv_exit" />
+
+            <TextView
+                android:id="@+id/tv_version_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="48dp"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="@string/version_app"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/pb_loading"
@@ -183,4 +179,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

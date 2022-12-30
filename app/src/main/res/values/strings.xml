@@ -13,21 +13,21 @@
     <string name="account">Account</string>
     <string name="search_hint">Search your preloved.....</string>
     <string name="category">Category</string>
-    <string name="your_full_name">Your Full Name</string>
+    <string name="your_full_name">Full Name</string>
     <string name="contentbackbutton">backbutton</string>
     <string name="tv_register">Register</string>
     <string name="tv_register_detail">Please register your identity before use Preloved.</string>
-    <string name="your_valid_email">Your Valid Email</string>
+    <string name="your_valid_email">Valid Email</string>
     <string name="your_unique_password">Your Unique Password</string>
-    <string name="your_phone_number">Your Phone Number</string>
-    <string name="enter_your_address">Enter Your Address</string>
+    <string name="your_phone_number">Phone Number</string>
+    <string name="enter_your_address">Address</string>
     <string name="register">Register</string>
     <string name="sudah_memiliki_akun_login">Already Have Account?  <b><font color='#EE839F'>Login</font></b></string>
     <string name="akun">Account</string>
     <string name="ubah_profile">Change Profile</string>
     <string name="keluar">Logout</string>
     <string name="version_app">Version 1.0.0</string>
-    <string name="enter_your_city">Enter Your City</string>
+    <string name="enter_your_city">Your City</string>
     <string name="add">Add</string>
     <string name="ubah">Change</string>
     <string name="data_produk">Product Data</string>
