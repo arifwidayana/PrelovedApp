@@ -1,6 +1,7 @@
 package com.preloved.app.data.network.service
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.preloved.app.BuildConfig
 import com.preloved.app.data.network.model.request.bid.BidRequest
 import com.preloved.app.data.network.model.response.bid.get.GetBidResponse
 import com.preloved.app.data.network.model.response.bid.post.PostBidResponse
@@ -50,7 +51,7 @@ interface CategoryService {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://market-final-project.herokuapp.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()

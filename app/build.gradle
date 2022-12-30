@@ -27,11 +27,12 @@ android {
         applicationId "com.preloved.app"
         minSdk 23
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName VERSION_NAME
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", BASE_URL)
         buildConfigField("String", "LOGIN", POST_LOGIN)
+        buildConfigField("String", "VERSION_NAME", VERSION_NAME)
     }
 
     buildTypes {

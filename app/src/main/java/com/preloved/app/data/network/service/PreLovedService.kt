@@ -1,6 +1,7 @@
-package com.preloved.app.data.network.services
+package com.preloved.app.data.network.service
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.preloved.app.BuildConfig
 import com.preloved.app.data.network.model.BuyerOrderResponse
 import com.preloved.app.data.network.model.HistoryResponseItem
 import com.preloved.app.data.network.model.request.auth.LoginRequest
@@ -8,8 +9,6 @@ import com.preloved.app.data.network.model.request.auth.RegisterRequest
 import com.preloved.app.data.network.model.response.*
 import com.preloved.app.data.network.model.response.auth.LoginResponse
 import com.preloved.app.data.network.model.response.auth.RegisterResponse
-import okhttp3.Interceptor
-import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -157,7 +156,7 @@ interface PreLovedService {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://market-final-project.herokuapp.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()
