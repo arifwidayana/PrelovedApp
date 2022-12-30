@@ -367,7 +367,7 @@ class SellFragment : BaseFragment<FragmentSellBinding, SellViewModel>(
                             val address = it.data.address
                             val photo = it.data.imageUrl
                             val phone = it.data.phoneNumber
-                            if(city.isEmpty() || address.isEmpty() || photo == false || phone.isEmpty()){
+                            if(city.isEmpty() || address.isEmpty() || photo == null || phone.isEmpty()){
                                 AlertDialog.Builder(requireContext())
                                     .setTitle(getString(R.string.warning))
                                     .setMessage(getString(R.string.message_complate_account))

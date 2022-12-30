@@ -320,11 +320,13 @@ class SaleFragment : BaseFragment<FragmentSaleBinding, SaleViewModel>
                     is Resource.Success -> {
                         showLoading(false)
                         if (it.data != null) {
-                            Glide.with(requireContext())
-                                .load(it.data.imageUrl.toString())
-                                .placeholder(R.drawable.ic_profile)
-                                .transform(CenterCrop(), RoundedCorners(12))
-                                .into(getViewBinding().ivAvatarPenjual)
+                            if(it.data.imageUrl != null ) {
+                                Glide.with(requireContext())
+                                    .load(it.data.imageUrl.toString())
+                                    .placeholder(R.drawable.ic_profile)
+                                    .transform(CenterCrop(), RoundedCorners(12))
+                                    .into(getViewBinding().ivAvatarPenjual)
+                            }
                             getViewBinding().apply {
                                 tvNamaPenjual.text = it.data.fullName
                                 tvKotaPenjual.text = it.data.city
